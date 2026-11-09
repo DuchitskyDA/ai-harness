@@ -1,0 +1,6 @@
+{
+  "limits": {"function_lines": 80, "complexity": 20, "nesting": 4, "params": 5, "test_asserts": 5},
+  "layers": [
+    {"files": "harness/presets/**", "forbid": ["hooks", "runner", "guard", "code_rules", "code_rules_lint", "redcheck_record"]}
+  ]
+}

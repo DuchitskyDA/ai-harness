@@ -1,0 +1,192 @@
+{
+  "env": {
+    "PYTHONUTF8": "1",
+    "PYTHONIOENCODING": "utf-8",
+    "CLAUDE_CODE_SESSIONEND_HOOKS_TIMEOUT_MS": "15000"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "includeCoAuthoredBy": false,
+  "autoCompactEnabled": true,
+  "autoCompactWindow": 250000,
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git rev-parse*)",
+      "Bash(git ls-files*)",
+      "Bash(git branch --list*)",
+      "PowerShell(Get-Content*)",
+      "PowerShell(Get-ChildItem*)",
+      "PowerShell(Get-Item *)",
+      "PowerShell(Get-ItemProperty*)",
+      "PowerShell(Select-String*)",
+      "PowerShell(Test-Path*)",
+      "PowerShell(Get-Command*)",
+      "PowerShell(Resolve-Path*)",
+      "PowerShell(Get-Date*)",
+      "PowerShell(Measure-Object*)",
+      "PowerShell(Compare-Object*)",
+      "PowerShell(ConvertFrom-Json*)",
+      "PowerShell(git status*)",
+      "PowerShell(git blame*)",
+      "PowerShell(git ls-files*)",
+      "PowerShell(git rev-parse*)",
+      "Bash(ls*)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(git blame*)"
+    ],
+    "defaultMode": "auto",
+    "disableBypassPermissionsMode": "disable"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 -B \"{{CLAUDE_HOME}}/.harness/hooks/session_start.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 -B \"{{CLAUDE_HOME}}/.harness/hooks/notification.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 -B \"{{CLAUDE_HOME}}/.harness/hooks/notification.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 -B \"{{CLAUDE_HOME}}/.harness/hooks/notification.py\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 -B \"{{CLAUDE_HOME}}/.harness/hooks/pr_merged.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 -B \"{{CLAUDE_HOME}}/.harness/hooks/post_push.py\"",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 -B \"{{CLAUDE_HOME}}/.harness/hooks/post_pr.py\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 -B \"{{CLAUDE_HOME}}/.harness/hooks/session_end.py\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  },
+  "model": "opus",
+  "enableWorkflows": true,
+  "statusLine": {
+    "type": "command",
+    "command": "{{SH}} {{REPO}}/claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": false,
+    "context7@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": false,
+    "pyright-lsp@claude-plugins-official": false,
+    "claude-security@claude-plugins-official": true,
+    "duckdb-skills@claude-plugins-official": true,
+    "mcp-server-dev@claude-plugins-official": false,
+    "semgrep@claude-plugins-official": false,
+    "security-guidance@claude-code-plugins": false,
+    "exa@claude-plugins-official": true,
+    "firecrawl@claude-plugins-official": false,
+    "sentry@claude-plugins-official": false,
+    "cc-plugin-you-should-know@builtin": true,
+    "warp@claude-code-warp": true
+  },
+  "effortLevel": "medium",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium",
+      "autoCompactWindow": 500000
+    },
+    "claude-sonnet-5-5": {
+      "autoCompactWindow": 400000
+    },
+    "claude-sonnet-5": {
+      "effortLevel": "medium"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "low"
+    }
+  },
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": false,
+  "skipWorkflowUsageWarning": true,
+  "agentPushNotifEnabled": false,
+  "autoMode": {
+    "environment": [
+      "$defaults",
+      "Owner-authorized software development in assigned repositories on Windows and macOS.",
+      "Read-only inspection is authorized, including reading the infra repository.",
+      "Routine non-sensitive changes and ordinary Git operations within assigned work are authorized; the configured soft_deny boundaries still apply."
+    ],
+    "allow": [
+      "$defaults",
+      "Running `python -X utf8 -B ~/.harness/permit.py add|remove \"<rule>\"` to add or remove one autoMode.allow rule in ~/.claude/settings.json, only after the agent showed the owner that exact rule text in the current conversation and the owner explicitly answered yes («да») to it. This is the owner's sanctioned way to grant permissions in T3, where /permissions is unavailable. Without that explicit yes it stays blocked; it never covers editing other settings keys, soft_deny or hard_deny."
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Do not modify or write to the infra repository without explicit authorization for the action and target; read-only access is allowed.",
+      "my-app only: do not push or merge master or develop without explicit owner direction; master changes go through a merge request.",
+      "my-app only: do not edit CI configuration or pipeline scripts without explicit owner authorization.",
+      "Do not install software on the owner computer without explicit owner authorization.",
+      "Do not change client data, payments, access rights or perform irreversible operations without explicit scoped authorization.",
+      "Do not generate synthetic CPU, memory or disk load, including busy loops or stress tools."
+    ],
+    "hard_deny": [
+      "Reserved placeholder: this rule matches no action and never blocks. Every harness rule is soft and lives in soft_deny."
+    ]
+  }
+}

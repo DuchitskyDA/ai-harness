@@ -1,0 +1,85 @@
+.DS_Store
+Thumbs.db
+
+# Claude Code runtime artifacts — никогда не синхронизируем
+**/.credentials.json
+**/history.jsonl
+**/mcp-needs-auth-cache.json
+**/sessions/
+**/session-env/
+**/shell-snapshots/
+**/telemetry/
+**/cache/
+**/image-cache/
+**/paste-cache/
+**/file-history/
+**/downloads/
+**/ide/
+**/backups/
+**/tasks/
+**/plans/
+**/plugins/cache/
+**/plugins/data/
+**/plugins/*-cache.json
+**/plugins/blocklist.json
+
+# Сессии/истории в projects/ — держим только memory/
+**/projects/*/sessions/
+**/projects/*/conversation-*.jsonl
+**/projects/*/*.jsonl
+
+# Локальные permissions — нарастают сами на каждой машине, не синкаем
+**/settings.local.json
+
+# Реальный settings.json содержит токены MCP и рендерится из settings.example.json.
+# В репо только settings.example.json.
+claude/settings.json
+
+# Резервные копии, которые install.sh/install.ps1 делают перед подменой файлов
+*.backup.*
+
+# Харнесс (harness/): изменяемое состояние, журналы, кэши — не конфигурация
+harness/**/*.log
+harness/**/logs/
+harness/**/*.jsonl
+harness/**/.beads/*.db
+harness/**/.beads/*.db-*
+harness/**/.beads/*.backup*
+harness/**/beads.db
+harness/**/beads.db-*
+harness/**/__pycache__/
+harness/**/*.pyc
+harness/**/.pytest_cache/
+harness/**/runtime/state/
+harness/**/tmp/
+# Локальные журналы: ложные отказы сторожа и уборки баз
+harness/guard-misfires.tsv
+harness/groom-*.tsv
+
+# Beads в любом другом месте репозитория (проектные .beads/)
+**/.beads/*.db
+**/.beads/*.db-*
+**/.beads/*.backup*
+
+# Артефакты semgrep-плагина — генерируются локально, не конфигурация
+**/.semgrep/
+
+# Python/pytest кэши где угодно в репозитории
+**/__pycache__/
+**/*.pyc
+**/.pytest_cache/
+
+# Вендоренная схема протокола: 416 файлов и почти 5 МБ, руками не правится,
+# восстанавливается из своего источника. В истории конфигурации ей не место.
+harness/runtime-schema/
+
+# Скиллы, которые Claude Code синхронизирует из аккаунта в ~/.claude/skills;
+# при junction-раскладке они физически оседают в этом клоне.
+claude/skills/synced/
+
+# Локальная база beads оснастки (Dolt, бэкапы, хуки): beads снят, в историю не попадает.
+harness/.beads/
+
+# Локальные секреты (ключи, токены): только на машине, никогда в Git.
+**/secrets.env
+**/.env

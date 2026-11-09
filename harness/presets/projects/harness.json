@@ -1,0 +1,30 @@
+{
+  "match": {"remotes": ["my-user/ai"], "dirs": ["ai", "claude-config-repo"]},
+  "exclude": [
+    "harness/runtime/state/**",
+    "harness/staging/**",
+    "harness/runtime/guard/rules.py"
+  ],
+  "lint": [
+    {
+      "command": ["{python}", "-X", "utf8", "-B", "harness/presets/python/code_check.py", "--config", "harness/code_check.json", "{files}"],
+      "stdin_command": ["{python}", "-X", "utf8", "-B", "harness/presets/python/code_check.py", "--config", "harness/code_check.json", "--stdin-filename", "{file}"],
+      "cwd": ".",
+      "format": "harness-json",
+      "hints": "harness/presets/python/hints.json",
+      "paths": ["**/*.py", "**/*.pyi"]
+    }
+  ],
+  "formatters": [
+    {"stdin_command": ["{python}", "-m", "ruff", "format", "--line-length", "120", "--stdin-filename", "{file}", "-"], "paths": ["**/*.py", "**/*.pyi"]}
+  ],
+  "typecheck": [
+    {"command": ["pyright", "--outputjson", "harness"], "format": "pyright-json", "paths": ["harness/**/*.py"]}
+  ],
+  "protected_configs": [
+    "harness/code_check.json",
+    "harness/presets/python/hints.json",
+    "harness/presets/ts/hints.json",
+    "harness/presets/ts/index.mjs"
+  ]
+}

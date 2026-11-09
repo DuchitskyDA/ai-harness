@@ -1,0 +1,4 @@
+{
+  "include": ["install.py", "validate_install.py", "test_install.py"],
+  "exclude": ["backups", "**/__pycache__"]
+}

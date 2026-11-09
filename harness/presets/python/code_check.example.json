@@ -1,0 +1,1 @@
+{"limits": {"function_lines": 80}, "layers": [{"files": "guard/**", "forbid": ["hooks", "runner"]}]}

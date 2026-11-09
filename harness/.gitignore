@@ -1,0 +1,8 @@
+
+# Остатки локальных файлов beads / Dolt (beads снят 30.10)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+
+.beads.gate.lock

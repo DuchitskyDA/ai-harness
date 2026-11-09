@@ -1,0 +1,15 @@
+{
+  "limits": {"code_lines": 400, "test_lines": 600, "function_lines": 80},
+  "code_extensions": [".py", ".pyi", ".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".mts", ".cts",
+                      ".vue", ".svelte", ".go", ".rs", ".java", ".kt", ".kts", ".swift", ".rb",
+                      ".php", ".cs", ".c", ".h", ".cc", ".cpp", ".hpp", ".scala", ".sh", ".ps1"],
+  "test_patterns": ["**/test_*.py", "**/*_test.py", "**/*_test.go", "**/*.test.*", "**/*.spec.*",
+                    "**/test/**", "**/tests/**", "**/__tests__/**", "**/e2e/**", "**/conftest.py"],
+  "exclude": ["**/node_modules/**", "**/dist/**", "**/build/**", "**/.next/**", "**/out/**",
+              "**/coverage/**", "**/generated/**", "**/__generated__/**", "**/migrations/**",
+              "**/migrations_pg/**", "**/vendor/**", "**/.venv/**", "**/*.d.ts", "**/*.min.js"],
+  "page_patterns": ["**/pages/**", "**/*-page.tsx", "**/*-page.jsx", "**/*Page.tsx", "**/*Page.jsx"],
+  "dom_test_patterns": [],
+  "lint": null,
+  "protected_configs": []
+}

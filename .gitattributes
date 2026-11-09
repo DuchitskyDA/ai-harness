@@ -1,0 +1,8 @@
+# Нормализуем переводы строк жёстко: core.autocrlf=true на Windows даёт CRLF
+# в рабочей копии, развёрнутые копии на других машинах (в т.ч. macOS) — LF,
+# и текстово идентичные файлы расходятся по байтам. eol=lf выравнивает всё.
+* text=auto eol=lf
+
+# Shell-скрипты обязаны оставаться LF: с CRLF на Linux/macOS падает шебанг
+# («bad interpreter»), а statusline-command.sh и install.sh запускаются именно там.
+*.sh text eol=lf

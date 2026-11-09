@@ -1,0 +1,16 @@
+{
+  "name": "harness-preset-ts",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.mjs",
+    "./plugin": "./plugin.mjs",
+    "./hints.json": "./hints.json"
+  },
+  "devDependencies": {
+    "@vitest/eslint-plugin": "1.6.27",
+    "eslint": "10.7.0",
+    "eslint-plugin-testing-library": "7.16.2",
+    "oxlint": "1.90.0"
+  }
+}
